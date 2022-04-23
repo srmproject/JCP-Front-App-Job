@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { RootState } from 'types/reducer';
-import { actions } from 'slices/sample';
+import { actions } from 'store/slices/sample';
 import { useSelector, useDispatch } from 'react-redux';
 
 import AtomButton from 'components/atoms/AtomButton';
