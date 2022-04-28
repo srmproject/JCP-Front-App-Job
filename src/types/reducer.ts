@@ -1,3 +1,3 @@
-import RootReducer from 'rootReducer';
+import RootReducer from 'store/slices';
 
 export type RootState = ReturnType<typeof RootReducer>;
