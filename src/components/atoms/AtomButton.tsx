@@ -4,9 +4,9 @@ import { Button } from 'antd';
 import { ButtonProperty } from 'types/atoms';
 
 const StyledButton: any = styled(Button)``;
-const AtomButton: FC<ButtonProperty> = ({ children, onClick, className }) => {
+const AtomButton: FC<ButtonProperty> = ({ children, onClick, className, type }) => {
   return (
-    <StyledButton onClick={onClick} className={className}>
+    <StyledButton onClick={onClick} className={className} type={type}>
       {children}
     </StyledButton>
   );

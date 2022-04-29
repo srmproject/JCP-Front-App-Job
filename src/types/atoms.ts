@@ -4,6 +4,7 @@ export interface ButtonProperty {
   children: ReactNode;
   onClick?(e?: MouseEvent): void;
   className?: string;
+  type?: string;
 }
 export interface HeaderProperty {
   onClick?(e?: MouseEvent): void;

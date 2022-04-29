@@ -6,8 +6,8 @@ const { Step } = Steps;
 const AtomSteps: FC<StepsProperty> = ({ current, steps, className }) => {
   return (
     <Steps current={current} className={className}>
-      {steps.map((step: Step) => (
-        <Step title={step.title} description={step.description} />
+      {steps.map((step: Step, index) => (
+        <Step key={`${step.title}-${index}`} title={step.title} description={step.description} />
       ))}
     </Steps>
   );
