@@ -23,6 +23,7 @@ const ModuleButtonGroup: FC<ButtonGroupProperty> = ({ buttons, className }) => {
           onClick={button.onClick}
           children={button.children}
           className={button.className}
+          htmlType={button.htmlType}
           type={button.type}
         />
       ))}

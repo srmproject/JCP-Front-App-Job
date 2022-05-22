@@ -5,6 +5,7 @@ export interface ButtonProperty {
   onClick?(e?: MouseEvent): void;
   className?: string;
   type?: string;
+  htmlType?: string;
 }
 export interface HeaderProperty {
   onClick?(e?: MouseEvent): void;
