@@ -8,7 +8,7 @@ console.log('APP NAME IS :::', packageJson.name);
 
 module.exports = merge(common, {
   devtool: 'inline-source-map', // production 일경우 source-map 처리
-  entry: srcPath + '/index.tsx',
+  entry: { [packageJson.name]: srcPath + '/App.tsx' },
   optimization: {},
   externals: {
     react: ['common-lib', 'React'],
