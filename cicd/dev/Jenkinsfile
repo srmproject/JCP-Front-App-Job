@@ -16,11 +16,6 @@ pipeline {
                 }
             }
         }
-        stage('print prebuild') {
-            steps {
-                echo "tag: ${tag}"
-            }
-        }
         stage('yarn install') {
             steps {
                 sh "yarn install"
