@@ -12,7 +12,6 @@ pipeline {
             steps {
                 script {
                     tag = sh(script: "git tag -l | tail -1 | tr -d \'\\n\'", returnStdout: true)
-                    docker_image_name = sh(script: "echo ${env.JOB_BASE_NAME} | tr -d \'\\n\'", returnStdout: true)
                 }
             }
         }
