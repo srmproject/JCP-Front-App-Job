@@ -29,7 +29,7 @@ pipeline {
         }
         stage('copy to folder') {
             steps {
-                sh "cp -r ./build /app/dev/jcp-application/${project_name}"
+                sh "cp -r ./build /app/dev/jcp-application/${JOB_BASE_NAME}"
             }
         }
     }
