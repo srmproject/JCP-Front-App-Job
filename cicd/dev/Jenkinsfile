@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    tools {
+        nodejs "node1610"
+    }
+    environment {
+        MODE = "dev"
+    }
+
+    stages {
+        stage('pre build') {
+            steps {
+                sh "rm -rf ././nginx.conf"
+                sh "cp ./cicd/dev/nginx.conf ./nginx.conf"
+                script {
+                    tag = sh(script: "git tag -l | tail -1 | tr -d \'\\n\'", returnStdout: true)
+                    docker_image_name = sh(script: "echo ${env.JOB_BASE_NAME} | tr -d \'\\n\'", returnStdout: true)
+                }
+            }
+        }
+        stage('print prebuild') {
+            steps {
+                echo "tag: ${tag}"
+            }
+        }
+        stage('yarn install') {
+            steps {
+                sh "yarn install"
+            }
+        }
+        stage('yarn build') {
+            steps {
+                sh "yarn build"
+                sh "ls -l ./build"
+            }
+        }
+        stage('copy to folder') {
+            steps {
+                sh "cp -r ./build /app/dev/jcp-application/${project_name}"
+            }
+        }
+    }
+}
