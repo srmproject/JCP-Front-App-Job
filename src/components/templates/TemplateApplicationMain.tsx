@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { Button, Table } from 'antd';
 import styled from 'styled-components';
 import { Divider } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 const Styled = styled.div`
   h3: {
   }
@@ -40,12 +42,17 @@ const data = [
     address: 'Sidney No. 1 Lake Park',
   },
 ];
+
 const TemplateApplicationMain: FC = () => {
+  let navigate = useNavigate();
+  const moveToCreatePage = () => {
+    return navigate('/create');
+  };
   return (
     <Styled>
       <h3>Filter</h3>
       <Divider></Divider>
-      <Button>생성버튼</Button>
+      <Button onClick={moveToCreatePage}>생성버튼</Button>
       <Table columns={columns} dataSource={data} size="middle" />
     </Styled>
   );
