@@ -57,3 +57,17 @@ export interface ButtonGroupProperty {
   buttons: Array<ButtonProperty>;
   className?: string;
 }
+export interface FormItemRulesProperty {
+  required: boolean;
+  message: string;
+}
+export interface FormItemProperty {
+  label?: string;
+  name?: string;
+  rules?: Array<FormItemRulesProperty>;
+  filed?: ReactNode;
+}
+export interface FormItemListProperty {
+  rows: Array<FormItemProperty>;
+  className?: string;
+}

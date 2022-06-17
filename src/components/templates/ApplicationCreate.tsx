@@ -1,12 +1,20 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, ReactNode } from 'react';
+import { useDispatch } from 'react-redux';
+import { actions } from 'store/slices/createJob';
 import { Divider, Layout, Select, Input, message, Form } from 'antd';
 import AtomHeader from 'components/atoms/AtomHeader';
 import AtomContent from 'components/atoms/AtomContent';
 import AtomH2 from 'components/atoms/AtomH2';
 import AtomSteps from 'components/atoms/AtomSteps';
 import ModuleButtonGroup from 'components/modules/ModuleButtonGroup';
+import FormItemList from 'components/modules/FormItemList';
+import { useNavigate } from 'react-router-dom';
+
 const { Option } = Select;
+
 const ApplicationCreate: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [cur, setCur] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -103,28 +111,20 @@ const ApplicationCreate: FC = () => {
     },
   ];
 
-  const onFinish = (values: any) => {
-    console.log(steps.length, cur);
+  const onFinish = async (values: any) => {
     if (steps.length - 2 >= cur) {
       return next();
     }
-    const { git_url, git_branch, git_filepath } = values;
-    delete values.git_url;
-    delete values.git_branch;
-    delete values.git_filepath;
-    console.log('Success:', {
-      ...values,
-      git: {
-        git_url,
-        git_branch,
-        git_filepath,
-      },
-    });
-    message.info('Create API send');
+    try {
+      dispatch(actions.createJob(values));
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.error('Failed:', errorInfo);
     message.info('Failed Vaildation');
   };
 
@@ -157,21 +157,6 @@ const ApplicationCreate: FC = () => {
         </Form>
       </AtomContent>
     </Layout>
-  );
-};
-
-export interface FormItemListProperty {
-  rows: any;
-}
-
-const FormItemList: FC<FormItemListProperty> = ({ rows }) => {
-  return (
-    rows &&
-    rows.map((row: any, index: Number) => (
-      <Form.Item key={`${row.label}-${index}`} label={row.label} name={row.name} rules={row.rules}>
-        {row.filed}
-      </Form.Item>
-    ))
   );
 };
 
