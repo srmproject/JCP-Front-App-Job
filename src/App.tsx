@@ -1,8 +1,12 @@
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import TemplateApplicationMain from 'components/templates/TemplateApplicationMain';
+import AppRoutes from 'container/AppRoutes';
 const App: FC = () => {
-  return <TemplateApplicationMain></TemplateApplicationMain>;
+  return (
+    <BrowserRouter>
+      <AppRoutes></AppRoutes>
+    </BrowserRouter>
+  );
 };
 
 export default { App }; //object로 export해야 사용가능..
