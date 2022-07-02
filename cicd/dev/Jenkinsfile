@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {
+        nodejs "node1610"
+    }
+    environment {
+        MODE = "dev"
+        MOUNT_DIR = "/app/dev/jcp-application/app-job"
+    }
+
+    stages {
+        stage('pre build') {
+            steps {
+                sh "rm -rf ./build"
+                script {
+                    tag = sh(script: "git tag -l | tail -1 | tr -d \'\\n\'", returnStdout: true)
+                }
+            }
+        }
+        stage('yarn install') {
+            steps {
+                sh "yarn install"
+            }
+        }
+        stage('yarn build') {
+            steps {
+                sh "yarn build"
+                sh "ls -l ./build"
+            }
+        }
+        stage('copy to folder') {
+            steps {
+                sh "rm -rf ${MOUNT_DIR}"
+                sh "cp -r ./build/* ${MOUNT_DIR}"
+            }
+        }
+    }
+}
