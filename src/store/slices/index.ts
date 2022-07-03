@@ -8,6 +8,7 @@ const reducers = {
   createApp,
   createJob,
 };
+
 const rootReducer = combineReducers(reducers);
 
 export { reducers };
